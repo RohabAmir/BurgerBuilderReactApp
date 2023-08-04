@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import classes from './BurgerIngredient.module.css';
 
-class BurgerIngredient extends Component{
+class BurgerIngredient extends Component{ 
     render(){
         let ingredient=null;
 
-        switch (this.props.type){
+        switch (this.props.type){ //using PropTypes in BurgerIngredient Componnet
             case ('bread-bottom'):
                 ingredient=<div className={classes.BreadBottom}></div>
                 break;
@@ -42,7 +42,7 @@ class BurgerIngredient extends Component{
     }
 }
 
-BurgerIngredient.propTypes={
+BurgerIngredient.propTypes={ //PropType Validation 
     type: PropTypes.string.isRequired
 
 };
