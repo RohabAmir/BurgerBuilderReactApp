@@ -33,7 +33,7 @@ class burgerBuilder extends Component{
 
         const sum = Object.keys(ingredients) //getting the array of properties of ingredients
             .map(igKey =>{
-                return ingredients[igKey]; //getting the values of each property of ingfredient
+                return ingredients[igKey]; //getting the values of each property of ingredient
             })
             .reduce((sum, el)=>{
                 return sum + el;
@@ -81,6 +81,10 @@ class burgerBuilder extends Component{
         this.setState({purchasing: false})
     }
 
+    purchaseContinueHandler = () =>{
+        alert("You Contiue!")
+    }
+
 
     render(){
 
@@ -95,7 +99,11 @@ class burgerBuilder extends Component{
         return(
             <Aux>
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-                    <OrderSummary ingredients={this.state.ingredients}/>
+                    <OrderSummary 
+                        ingredients={this.state.ingredients}
+                        price={this.state.totalPrice}
+                        purchaseCancelled={this.purchaseCancelHandler}
+                        purchaseContinued={this.purchaseContinueHandler}/>
                 </Modal>
                 <Burger ingredients={this.state.ingredients}  /> {/*Previewing and adding ingredients in the Burger Component */}
                 <BuildControls 
