@@ -94,8 +94,7 @@ class burgerBuilder extends Component{
                     zipCode: '6303',
                     country: 'Pakistan'
                 },
-                email: 'Rohabamir2@gmail.com',
-                phoneNo: '0320-******'   
+                email: 'Rohabamir2@gmail.com',   
             },
             deliveryMethod: "fastest"
         }
