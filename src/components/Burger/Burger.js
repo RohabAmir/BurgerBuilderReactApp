@@ -12,6 +12,7 @@ const burger=(props)=>{ // Outputting Burger Ingredients Dynamically
         .reduce((arr,el)=>{ //Flatenning the array of ingredients
             return arr.concat(el)
         },[]);
+        
         if(transformedIngredients.length===0){
             transformedIngredients=<p>Please start adding ingredients!</p>
         }
