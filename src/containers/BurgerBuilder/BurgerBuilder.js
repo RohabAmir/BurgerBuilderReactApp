@@ -1,5 +1,4 @@
 import React,{ Component } from "react";
-
 import Aux from "../../hoc/Aux";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
@@ -30,6 +29,7 @@ class burgerBuilder extends Component{
     }
 
     componentDidMount() { //Fetching data from Backend
+        console.log(this.props);
         axios.get('https://react-my-burger-4674d-default-rtdb.firebaseio.com/ingredients.json')
             .then(response => {
                 this.setState({ ingredients: response.data})
@@ -39,6 +39,7 @@ class burgerBuilder extends Component{
             })
 
     }
+
 
     updatePurchaseState(ingredients){
 
@@ -94,30 +95,31 @@ class burgerBuilder extends Component{
 
     purchaseContinueHandler = () =>{
         //alert("You Contiue!")
-        this.setState({loading: true});
-        const order={
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Rohab Aamir',
-                address: {
-                    street: 'Street-B',
-                    zipCode: '6303',
-                    country: 'Pakistan'
-                },
-                email: 'Rohabamir2@gmail.com',
-                phoneNo: '0320-******'   
-            },
-            deliveryMethod: "fastest"
-        }
+    //     this.setState({loading: true});
+    //     const order={
+    //         ingredients: this.state.ingredients,
+    //         price: this.state.totalPrice,
+    //         customer: {
+    //             name: 'Rohab Aamir',
+    //             address: {
+    //                 street: 'Street-B',
+    //                 zipCode: '6303',
+    //                 country: 'Pakistan'
+    //             },
+    //             email: 'Rohabamir2@gmail.com',
+    //             phoneNo: '0320-******'   
+    //         },
+    //         deliveryMethod: "fastest"
+    //     }
 
-        axios.post('/orders.json', order) //Sending data to Backend
-            .then(response=>{
-                this.setState({loading: false, purchasing: false})
-            })
-            .catch(error=>{
-                this.setState({loading: false, purchasing: false})
-            });
+    //     axios.post('/orders.json', order) //Sending data to Backend
+    //         .then(response=>{
+    //             this.setState({loading: false, purchasing: false})
+    //         })
+    //         .catch(error=>{
+    //             this.setState({loading: false, purchasing: false})
+    //         });
+        this.props.history.push('/checkout');
     }
 
 
