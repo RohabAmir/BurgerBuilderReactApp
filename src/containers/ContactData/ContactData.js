@@ -65,9 +65,14 @@ class contactData extends Component{
     orderHandler=(event)=>{
         event.preventDefault(); // this gonna prevent the default which would be to send a request
         this.setState({loading: true});
+        const formData={};
+        for(let formElementIdentifier in this.state.orderForm){
+            formData[formElementIdentifier]=this.state.orderForm[formElementIdentifier].value
+        }
         const order={
             ingredients: this.props.ingredients,
             price: this.props.price,
+            orderData: formData
         }
         axios.post('/orders.json', order) //Sending data to Backend
             .then(response=>{
@@ -77,6 +82,18 @@ class contactData extends Component{
             .catch(error=>{
                 this.setState({loading: false})
             });
+
+    }
+    inputChangeHandler=(event,inputIdentifier)=>{
+        const updatedOrderForm={
+            ...this.state.orderForm
+        };
+        const updatedFormElement={
+            ...updatedOrderForm[inputIdentifier]
+        };
+        updatedFormElement.value= event.target.value;
+        updatedOrderForm[inputIdentifier]= updatedFormElement;
+        this.setState({orderForm: updatedOrderForm});
 
     }
 
@@ -91,16 +108,17 @@ class contactData extends Component{
         }
 
         let form=(
-            <form>
+            <form onSubmit={this.orderHandler}>
                 {formElementsArray.map(formElement =>(
                     <Input
                     key={formElement.id}
                     elementType={formElement.config.elementType}
                     elementConfig={formElement.config.elementConfig}
-                    value={formElement.config.value}  
+                    value={formElement.config.value}
+                    changed={(event) => this.inputChangeHandler(event,formElement.id)}  
                     />
                 ))}
-                <Button btnType='Success' clicked={this.orderHandler}>ORDER</Button>
+                <Button btnType='Success'>ORDER</Button>
 
             </form>
         );
