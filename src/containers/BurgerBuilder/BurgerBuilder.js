@@ -29,14 +29,14 @@ class burgerBuilder extends Component{
     }
 
     componentDidMount() { //Fetching data from Backend
-        console.log(this.props);
-        axios.get('https://react-my-burger-4674d-default-rtdb.firebaseio.com/ingredients.json')
-            .then(response => {
-                this.setState({ ingredients: response.data})
-            })
-            .catch(error => {
-                this.setState({error: true})
-            })
+        // console.log(this.props);
+        // axios.get('https://react-my-burger-4674d-default-rtdb.firebaseio.com/ingredients.json')
+        //     .then(response => {
+        //         this.setState({ ingredients: response.data})
+        //     })
+        //     .catch(error => {
+        //         this.setState({error: true})
+        //     })
 
     }
 
