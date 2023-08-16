@@ -29,7 +29,6 @@ export const purchaseBurger =(orderData)=>{ // handling orders Aynchronously
         dispatch(purchaseBurgerStart());
         axios.post('/orders.json', orderData) //Sending data to Backend
         .then(response=>{
-            console.log(response.data);
             dispatch( purchaseBurgerSuccess(response.data.name , orderData ))
 
         })
@@ -40,5 +39,12 @@ export const purchaseBurger =(orderData)=>{ // handling orders Aynchronously
 
     };
 
+};
+
+export const purchaseInit=() =>{
+    return{
+        type: actionTypes.PURCHASE_INIT
+
+    };
 };
 
