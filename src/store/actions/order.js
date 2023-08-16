@@ -30,7 +30,7 @@ export const purchaseBurger =(orderData)=>{ // handling orders Aynchronously
         axios.post('/orders.json', orderData) //Sending data to Backend
         .then(response=>{
             console.log(response.data);
-            dispatch( purchaseBurgerSuccess(response.data , orderData ))
+            dispatch( purchaseBurgerSuccess(response.data.name , orderData ))
 
         })
         .catch(error=>{
