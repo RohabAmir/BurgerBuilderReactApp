@@ -30,7 +30,7 @@ export const setIngredients= (ingredients) =>{
     };
 };
 
-export const initIngredients= () => {
+export const initIngredients= () => { //Handling Ingredients Asynchronously
 
     return dispatch =>{
         axios.get('https://react-my-burger-4674d-default-rtdb.firebaseio.com/ingredients.json')

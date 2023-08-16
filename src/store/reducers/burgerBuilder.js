@@ -1,4 +1,3 @@
-import { bindActionCreators } from 'redux';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState={
@@ -15,7 +14,7 @@ const INGREDIENTS_PRICES={
 };
 
 
-const reducer =( state = initialState, action) => {
+const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.ADD_INGREDIENT:
             return {  //returning updated state based on the old state
@@ -43,14 +42,11 @@ const reducer =( state = initialState, action) => {
                 ingredients: action.ingredients,
                 error: false
             }
-            case actionTypes.FETCH_INGREDIENTS_FAILED:
-                return{
-                    ...state,
-                    error: true
-                }
-        
-            
-        
+        case actionTypes.FETCH_INGREDIENTS_FAILED:
+            return{
+                ...state,
+                error: true
+            }
         default:
             return state;
     }

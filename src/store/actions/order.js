@@ -18,8 +18,15 @@ export const purchaseBurgerFail =(error)=>{
     };
 };
 
-export const purchaseBurgerStart =(orderData)=>{
+export const purchaseBurgerStart = () =>{
+    return{
+        type: actionTypes.PURCHASE_BURGER_START
+    };
+};
+
+export const purchaseBurger =(orderData)=>{ // handling orders Aynchronously
     return dispatch => {
+        dispatch(purchaseBurgerStart());
         axios.post('/orders.json', orderData) //Sending data to Backend
         .then(response=>{
             console.log(response.data);
