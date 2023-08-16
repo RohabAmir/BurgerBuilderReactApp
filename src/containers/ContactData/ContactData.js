@@ -5,6 +5,7 @@ import classes from './ContactData.module.css';
 import Button from "../../components/UI/Button/Button";
 import axios from '../../axios-orders';
 import Input from "../../components/UI/Forms/Input";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 class contactData extends Component{
     state={
@@ -105,14 +106,6 @@ class contactData extends Component{
             price: this.props.price,
             orderData: formData
         }
-        axios.post('/orders.json', order) //Sending data to Backend
-            .then(response=>{
-                this.setState({loading: false})
-                this.props.history.push('/')
-            })
-            .catch(error=>{
-                this.setState({loading: false})
-            });
 
     }
     checkValidity(value,rules){
@@ -197,4 +190,8 @@ const mapStateToProps = state =>{
         price: state.totalPrice
     }
 };
-export default connect(mapStateToProps)(contactData);
+
+
+
+
+export default connect(mapStateToProps)(withErrorHandler(contactData, axios));
