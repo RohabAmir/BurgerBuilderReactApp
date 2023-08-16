@@ -41,12 +41,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 ingredients: action.ingredients,
                 error: false
-            }
+            };
         case actionTypes.FETCH_INGREDIENTS_FAILED:
             return{
                 ...state,
                 error: true
-            }
+            };
         default:
             return state;
     }
