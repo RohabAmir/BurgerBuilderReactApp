@@ -6,6 +6,7 @@ import Button from "../../components/UI/Button/Button";
 import axios from '../../axios-orders';
 import Input from "../../components/UI/Forms/Input";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+import * as orderActions from '../../../store/actions/index';
 
 class contactData extends Component{
     state={
@@ -107,6 +108,8 @@ class contactData extends Component{
             orderData: formData
         }
 
+        this.props.onOrderBurger(order);
+
     }
     checkValidity(value,rules){
         let isValid= true;
@@ -190,8 +193,16 @@ const mapStateToProps = state =>{
         price: state.totalPrice
     }
 };
+const mapDispatchToProps = dispatch =>{
+    return{
+        onOrderBurger: (orderData) => dispatch(orderActions.purchaseBurgerStart(orderData))
+
+    };
+};
 
 
 
 
-export default connect(mapStateToProps)(withErrorHandler(contactData, axios));
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(contactData, axios));
