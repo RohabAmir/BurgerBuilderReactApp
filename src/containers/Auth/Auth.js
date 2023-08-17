@@ -28,13 +28,15 @@ class Auth extends Component{
                 },
                 value:'',
                 validation:{
-                    required: true
+                    required: true,
+                    minLength: 6
                 },
                 valid: false,
                 touched: false 
             } ,      
         }
     }
+
     checkValidity(value,rules){
         let isValid= true;
 
@@ -59,6 +61,20 @@ class Auth extends Component{
 
         return isValid;
     }
+
+    inputChangeHandler = (event,controlName) => {
+        const updatedControls={
+            ...this.state.controls,
+            [controlName]:{
+                ...this.state.controls[controlName],
+                value: event.target.value,
+                valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
+                touched: true
+            }
+        }
+        this.setState({controls: updatedControls});
+
+    }
     render(){
         const formElementsArray=[]; // coverting JS object into array to map the elements
         for(let key in this.state.controls){
@@ -76,8 +92,7 @@ class Auth extends Component{
                 invalid={!formElement.config.valid}
                 shouldValidate={formElement.config.validation}
                 touched={formElement.config.touched}
-                changed={(event) => this.inputChangeHandler(event,formElement.id)}  
-            />
+                changed={(event) => this.inputChangeHandler(event,formElement.id)} />
         )   );
 
 
