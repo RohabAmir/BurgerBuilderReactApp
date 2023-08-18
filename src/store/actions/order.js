@@ -21,10 +21,10 @@ export const purchaseBurgerStart = () =>{
         type: actionTypes.PURCHASE_BURGER_START
     };
 };
-export const purchaseBurger =(orderData)=>{ // handling orders Aynchronously
+export const purchaseBurger =(orderData,token)=>{ // handling orders Aynchronously
     return dispatch => {
         dispatch(purchaseBurgerStart());
-        axios.post('/orders.json', orderData) //Sending data to Backend
+        axios.post('/orders.json?auth='+token, orderData) //Sending data to Backend
         .then(response=>{
             dispatch( purchaseBurgerSuccess(response.data.name , orderData ))
 
@@ -62,10 +62,10 @@ export const fetchOrdersStart = () =>{
         type: actionTypes.FETCH_ORDERS_START
     };
 };
-export const fetchOrders=()=> { //handling the fetcing of orders asynchronously
+export const fetchOrders=(token)=> { //handling the fetcing of orders asynchronously
     return dispatch =>{
         dispatch(fetchOrdersStart());
-        axios.get('/orders.json')
+        axios.get('/orders.json?auth=' + token)
         .then(res=>{
             const fetchedOrders=[];
             for(let key in res.data){
