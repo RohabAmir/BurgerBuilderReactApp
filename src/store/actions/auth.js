@@ -19,7 +19,7 @@ export const authFail = (error) =>{
     };
 };
 
-export const auth= (email,password)=>{ //handling Authentication Asynchronosuly 
+export const auth= (email,password, isSignUp)=>{ //handling Authentication Asynchronosuly 
     return dispath=>{
         dispath(authStart());
         const authData={
@@ -27,7 +27,10 @@ export const auth= (email,password)=>{ //handling Authentication Asynchronosuly
             password: password,
             returnSecureToken: true
         }
-        axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyB5cHT6x62tTe-g27vBDIqWcwQWBSj3uiY',authData)
+        let url= 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyDfY09kJpU87eHRMGqiKew4YrxBXP7KJf4'
+        if(!isSignUp){
+            url= 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDfY09kJpU87eHRMGqiKew4YrxBXP7KJf4'
+        axios.post(url,authData)
             .then(response =>{
                 console.log(response);
                 dispath(authSuccess(response.data));
@@ -36,5 +39,6 @@ export const auth= (email,password)=>{ //handling Authentication Asynchronosuly
                 dispath(authFail(err));
             });
     }
+}
 }
 
