@@ -38,7 +38,7 @@ export const auth= (email,password, isSignUp)=>{ //handling Authentication Async
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
             })
             .catch(err => {
-                dispatch(authFail(err));
+                dispatch(authFail(err.response.data.error));
             });
     }
 };
