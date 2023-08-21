@@ -18,7 +18,6 @@ class burgerBuilder extends Component{
     }
 
     componentDidMount() { //Fetching data from Backend
-        console.log(this.props);
         this.props.onInitIngredients();
     }
 
