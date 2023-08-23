@@ -3,7 +3,6 @@ import classes from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const burger=(props)=>{ // Outputting Burger Ingredients Dynamically 
-    console.log(props)
     let transformedIngredients= Object.keys(props.ingredients) //getting the array of keys of ingredient object
         .map(igKey=>{
             return[...Array(props.ingredients[igKey])].map((_,i)=>{
