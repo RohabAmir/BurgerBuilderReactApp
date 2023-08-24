@@ -1,45 +1,36 @@
-import React,{ Component } from "react";
+import React,{useState} from "react";
 import { connect } from "react-redux";
 import Aux from "../Aux";
 import classes from './Layout.module.css';
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 
-class Layout extends Component { 
-    state={
-        showSideDrawer:false
+const Layout = props => {
+    const[sideDrawerIsVisible, setSideDrawerIsVisible]=useState(false)
+
+    const sideDrawerClosedHandler= () =>{
+        setSideDrawerIsVisible(false);
     }
 
-    sideDrawerClosedHandler= () =>{
-        this.setState({showSideDrawer:false})
-    }
-
-    sideDrawerToggleHandler=()=>{
-        this.setState((prevState)=>{ //when state depending on a previous state 
-            return { showSideDrawer: !prevState.showSideDrawer}
-
-        });
+    const sideDrawerToggleHandler=()=>{
+        setSideDrawerIsVisible(!sideDrawerIsVisible); //when state depends on previous state
 
     }
-
-
-    render() {
-        return(
+    return(
             <Aux>
                 <Toolbar 
-                    isAuth={this.props.isAuthenticate}
-                    drawerToggleClicked={this.sideDrawerToggleHandler}/>
+                    isAuth={props.isAuthenticate}
+                    drawerToggleClicked={sideDrawerToggleHandler}/>
                 <SideDrawer
-                    isAuth={this.props.isAuthenticate}
-                    open={this.state.showSideDrawer}
-                    closed={this.sideDrawerClosedHandler} />
+                    isAuth={props.isAuthenticate}
+                    open={sideDrawerIsVisible}
+                    closed={sideDrawerClosedHandler} />
                 <main className={classes.Content}>
-                    {this.props.children}
+                    {props.children}
                 </main>
             </Aux>
-        )
-    } 
-};
+    )
+}; 
 const mapStateToProps=state =>{
     return{
         isAuthenticate: state.auth.token !== null 
